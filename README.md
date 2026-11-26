@@ -1,15 +1,49 @@
-# 🧬 BabyMaker IVF
+# BabyMakers IVF — Fertility Clinic Website
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=waving&color=0:7f1d1d,100:be123c&height=180&section=header&text=BabyMaker%20IVF&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=35" alt="BabyMaker IVF banner"/></p>
+A multi-page, responsive website for a fertility and IVF clinic, built with **React 18**, **Vite 5** and **Tailwind CSS 4**. It presents treatments, genetic testing, international patient support and a blog, and lets visitors book a consultation or contact the clinic.
 
-<p align="center"><b>A healthcare-focused frontend web project for an IVF-related digital experience.</b></p>
+## Features
 
-<p align="center"><img src="https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=111827"/> <img src="https://img.shields.io/badge/Healthcare-UI-BE123C"/></p>
+- **Nine routes:** Home (`/`), About (`/about`), Services (`/services`), International patients (`/international`), Blog (`/blog`), Contact (`/contact`), Genetic Testing (`/genetic`) and Booking (`/booking`)
+- **Multi-step booking form** collecting personal details, service, date and time, and notes, then sending the request to the clinic's WhatsApp (`wa.me`)
+- **Contact form** that also opens a pre-filled WhatsApp message, plus phone, email and an embedded map
+- **Rule-based chatbot ("Aria")** that answers common questions about IVF, ICSI, egg freezing, genetic testing and international care using keyword matching. It is not connected to an AI service
+- **Floating call and WhatsApp buttons** on every page
+- **Six colour themes** (light, dark, rose, ocean, forest, sunset), saved in `localStorage`
+- Image gallery, scroll-to-top on navigation, and a responsive Navbar and Footer
 
-## 🌸 Overview
-BabyMaker IVF is structured as a modern frontend application. It includes application source, public assets and a Vite configuration, with a production `dist` archive also present in the repository.
+## Tech stack
 
-## 🚀 Run Locally
+| Area | Tools |
+|---|---|
+| UI | React `^18.2.0`, React DOM `^18.2.0` |
+| Routing | React Router DOM `^6.22.0` |
+| Styling | Tailwind CSS `^4.2.2` (via `@tailwindcss/vite`) plus per-page CSS files |
+| Icons | Lucide React `^1.8.0` |
+| Build tool | Vite `^5.1.0`, `@vitejs/plugin-react` `^4.2.1` |
+
+## Project structure
+
+```text
+babymakerivf/
+├── public/images/        # Banners, logo, team and social icons
+├── src/
+│   ├── components/       # Navbar, Footer, BookingForm, Chatbot,
+│   │                     # Floatingcontactbuttons, Gallery, SectionHeader, ScrollToTop
+│   ├── pages/            # Home, About, Services, International, Blog,
+│   │                     # Contact, GeneticTesting (each with its own CSS)
+│   ├── styles/global.css # Global styles and theme variables
+│   ├── App.jsx           # Routes, theme state, chatbot and floating buttons
+│   └── main.jsx          # Entry point (BrowserRouter)
+├── index.html
+├── vite.config.mjs
+└── package.json
+```
+
+## Getting started
+
+Requires Node.js 18 or newer.
+
 ```bash
 git clone https://github.com/Abhishek7258/BabyMakerIvf.git
 cd BabyMakerIvf
@@ -17,35 +51,21 @@ npm install
 npm run dev
 ```
 
-Use `package.json` as the source of truth for scripts.
+The dev server runs at http://localhost:5173.
 
-## 📁 Structure
-```text
-BabyMakerIvf/
-├── src/
-├── public/
-├── index.html
-├── package.json
-├── vite.config.mjs
-└── dist.zip
-```
+## Scripts
 
-## 🧭 Application Flow
-```mermaid
-graph LR
-A[Visitor] --> B[Website UI]
-B --> C[Healthcare Information]
-B --> D[Contact / Conversion Actions]
-```
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Create a production build in `dist/` |
+| `npm run preview` | Serve the production build locally |
 
-## ⚠️ Healthcare Disclaimer
-Website content should not be interpreted as personalized medical advice. Clinical decisions should be made with qualified healthcare professionals.
+## Deployment
 
-## 🔐 Privacy
-Do not commit patient information, credentials, API keys or other confidential healthcare data to the repository.
+`npm run build` produces a static site in `dist/`, which can be hosted on Netlify, Vercel, GitHub Pages or any static host. The app uses `BrowserRouter`, so configure the host to serve `index.html` for unknown paths so refreshing a route such as `/booking` works.
 
-## 📸 Screenshots
-Add approved screenshots under `docs/screenshots/` to document the real UI.
+## Before going live
 
-## 📄 License
-No license file is currently declared.
+- The WhatsApp number, phone, email and map embed are set in `src/components/BookingForm.jsx`, `src/components/Floatingcontactbuttons.jsx` and `src/pages/Contact.jsx`. Update them together.
+- Success rates, prices and other figures in `src/components/Chatbot.jsx` and the page copy are placeholder content. Replace them with figures the clinic can verify.
